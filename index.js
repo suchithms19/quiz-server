@@ -1,11 +1,15 @@
-const express = require('express');
 require('dotenv').config();
+const express = require('express');
+const connectDB = require('./config/db');
 const PORT = process.env.PORT;
+connectDB();
 
 const app = express();
 
-app.get('/', (_req, res) => {
-  res.send('Hello World!');
+app.use(express.json());
+
+app.get('/ping', (_req, res) => {
+  res.send('pong');
 });
 
 app.listen(PORT, () => {
