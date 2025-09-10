@@ -6,7 +6,6 @@ const optionSchema = z.object({
 });
 
 const questionSchema = z.object({
-  questionId: z.string().uuid("Question ID must be a valid UUID"),
   description: z.string().min(1, "Question description is required"),
   options: z.array(optionSchema)
     .min(1, "At least one option is required")
@@ -37,7 +36,7 @@ const validateQuiz = (data) => {
   } catch (error) {
     return {
       success: false,
-      errors: error.errors
+      errors: error.issues || error.errors || []
     };
   }
 };

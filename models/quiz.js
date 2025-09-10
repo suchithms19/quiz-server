@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 const optionSchema = new mongoose.Schema({
   text: {
@@ -14,7 +15,7 @@ const optionSchema = new mongoose.Schema({
 const questionSchema = new mongoose.Schema({
   questionId: {
     type: String,
-    required: true
+    default: () => uuidv4()
   },
   description: {
     type: String,
@@ -33,6 +34,11 @@ const questionSchema = new mongoose.Schema({
 }, { _id: false });
 
 const quizSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    default: () => uuidv4(),
+    unique: true
+  },
   name: {
     type: String,
     required: true,
@@ -60,6 +66,6 @@ const quizSchema = new mongoose.Schema({
       message: 'Number of questions must match noOfQuestions field'
     }
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Quiz', quizSchema);
