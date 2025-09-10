@@ -45,12 +45,24 @@ router.post('/createQbanks', async (req, res) => {
 
 router.get('/qbanks', async (_req, res) => {
   try {
-    const quizzes = await Quiz.find({});
+    const quizzes = await Quiz.find({}, 'id name category noOfQuestions status');
     res.status(200).json(quizzes);
   } catch (error) {
     console.error('Error fetching quizzes:', error);
     res.status(500).json({
       error: 'Unable to fetch qbanks'
+    });
+  }
+});
+
+router.get('/qbanks/:id', async (req, res) => {
+  try {
+    const quiz = await Quiz.findById(req.params.id);
+    res.status(200).json(quiz);
+  } catch (error) {
+    console.error('Error fetching quiz by ID:', error);
+    res.status(500).json({
+      error: 'Unable to fetch quiz'
     });
   }
 });
