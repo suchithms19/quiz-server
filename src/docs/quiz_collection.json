@@ -1,0 +1,58 @@
+{
+  "info": {
+    "name": "Quiz Server API",
+    "_postman_id": "3f2c2d58-4b3e-4f0a-9f0e-9f7a5a2f9c12",
+    "description": "Collection for Quiz Server routes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Qbanks",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/createQbanks",
+          "host": ["{{base_url}}"],
+          "path": ["createQbanks"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"JavaScript Basics\",\n  \"category\": \"Programming\",\n  \"noOfQuestions\": 2,\n  \"status\": true,\n  \"questions\": [\n    {\n      \"description\": \"What is JavaScript?\",\n      \"options\": [\n        { \"text\": \"A programming language\", \"isCorrect\": true },\n        { \"text\": \"A database\", \"isCorrect\": false }\n      ]\n    },\n    {\n      \"description\": \"Which keyword is used to declare variables?\",\n      \"options\": [\n        { \"text\": \"var\", \"isCorrect\": true },\n        { \"text\": \"int\", \"isCorrect\": false }\n      ]\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "List Qbanks",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/qbanks",
+          "host": ["{{base_url}}"],
+          "path": ["qbanks"]
+        }
+      }
+    },
+    {
+      "name": "Get Qbank by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/qbanks/:id",
+          "host": ["{{base_url}}"],
+          "path": ["qbanks", ":id"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:4000/api"
+    }
+  ]
+}
+
+

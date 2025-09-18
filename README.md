@@ -2,6 +2,24 @@
 
 A simple REST API for managing quiz question banks built with Node.js, Express, and MongoDB.
 
+## Structure
+
+```
+src/
+  controllers/
+    quiz.js          # HTTP handlers (validation, orchestration, responses)
+  services/
+    quiz.js          # Data access and domain operations
+  models/
+    quiz.js          # Mongoose schema and model
+  routes/
+    quiz.js          # Express routes mapping to controllers
+  schemas/
+    quiz.js          # Zod validation schemas
+  docs/
+    quiz_collection.json  # Postman collection
+```
+
 ## Features
 
 - Create quiz question banks
