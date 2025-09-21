@@ -14,8 +14,8 @@
           { "key": "Content-Type", "value": "application/json" }
         ],
         "url": {
-          "raw": "{{base_url}}/createQbanks",
-          "host": ["{{base_url}}"],
+          "raw": "{{baseUrl}}/createQbanks",
+          "host": ["{{baseUrl}}"],
           "path": ["createQbanks"]
         },
         "body": {
@@ -29,8 +29,8 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "{{base_url}}/qbanks",
-          "host": ["{{base_url}}"],
+          "raw": "{{baseUrl}}/qbanks",
+          "host": ["{{baseUrl}}"],
           "path": ["qbanks"]
         }
       }
@@ -40,8 +40,8 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "{{base_url}}/qbanks/:id",
-          "host": ["{{base_url}}"],
+          "raw": "{{baseUrl}}/qbanks/:id",
+          "host": ["{{baseUrl}}"],
           "path": ["qbanks", ":id"]
         }
       }
@@ -49,7 +49,7 @@
   ],
   "variable": [
     {
-      "key": "base_url",
+      "key": "baseUrl",
       "value": "http://localhost:4000/api"
     }
   ]

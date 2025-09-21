@@ -1,27 +1,27 @@
 const Quiz = require('../models/quiz');
 
-async function create_quiz(quiz_data) {
-  const quiz = new Quiz(quiz_data);
+async function createQuiz(quizData) {
+  const quiz = new Quiz(quizData);
   return quiz.save();
 }
 
-async function find_quiz_by_name(name) {
+async function findQuizByName(name) {
   return Quiz.findOne({ name });
 }
 
-async function list_quizzes() {
+async function listQuizzes() {
   return Quiz.find({}, 'id name category noOfQuestions status');
 }
 
-async function get_quiz_by_id(id) {
+async function getQuizById(id) {
   return Quiz.findById(id);
 }
 
 module.exports = {
-  create_quiz,
-  find_quiz_by_name,
-  list_quizzes,
-  get_quiz_by_id,
+  createQuiz,
+  findQuizByName,
+  listQuizzes,
+  getQuizById,
 };
 
 

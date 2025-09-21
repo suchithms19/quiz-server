@@ -1,7 +1,7 @@
 const { validateQuiz } = require('../schemas/quiz');
-const quiz_service = require('../services/quiz');
+const quizService = require('../services/quiz');
 
-async function create_qbanks(req, res) {
+async function createQbanks(req, res) {
   try {
     const validation = validateQuiz(req.body);
     if (!validation.success) {
@@ -13,13 +13,13 @@ async function create_qbanks(req, res) {
       });
     }
 
-    const quiz_data = validation.data;
-    const existing = await quiz_service.find_quiz_by_name(quiz_data.name);
+    const quizData = validation.data;
+    const existing = await quizService.findQuizByName(quizData.name);
     if (existing) {
       return res.status(409).json({ error: 'Quiz with this name already exists' });
     }
 
-    const saved = await quiz_service.create_quiz(quiz_data);
+    const saved = await quizService.createQuiz(quizData);
     return res.status(200).json({
       id: saved.id,
       name: saved.name,
@@ -33,9 +33,9 @@ async function create_qbanks(req, res) {
   }
 }
 
-async function list_qbanks(_req, res) {
+async function listQbanks(_req, res) {
   try {
-    const quizzes = await quiz_service.list_quizzes();
+    const quizzes = await quizService.listQuizzes();
     return res.status(200).json(quizzes);
   } catch (error) {
     console.error('Error fetching quizzes:', error);
@@ -43,9 +43,9 @@ async function list_qbanks(_req, res) {
   }
 }
 
-async function get_qbank_by_id(req, res) {
+async function getQbankById(req, res) {
   try {
-    const quiz = await quiz_service.get_quiz_by_id(req.params.id);
+    const quiz = await quizService.getQuizById(req.params.id);
     return res.status(200).json(quiz);
   } catch (error) {
     console.error('Error fetching quiz by ID:', error);
@@ -54,9 +54,9 @@ async function get_qbank_by_id(req, res) {
 }
 
 module.exports = {
-  create_qbanks,
-  list_qbanks,
-  get_qbank_by_id,
+  createQbanks,
+  listQbanks,
+  getQbankById,
 };
 
 
