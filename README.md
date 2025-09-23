@@ -2,22 +2,31 @@
 
 A simple REST API for managing quiz question banks built with Node.js, Express, and MongoDB.
 
-## Structure
+## Project Structure
 
 ```
 src/
+  config/
+    db.js            # MongoDB connection configuration
   controllers/
     quiz.js          # HTTP handlers (validation, orchestration, responses)
   services/
     quiz.js          # Data access and domain operations
   models/
-    quiz.js          # Mongoose schema and model
+    quiz.js          # Mongoose schema and model definitions
   routes/
     quiz.js          # Express routes mapping to controllers
   schemas/
-    quiz.js          # Zod validation schemas
+    quiz.js          # Zod validation schemas for request validation
+  tests/
+    controllers/
+      quiz.test.js   # Controller layer unit tests
+    services/
+      quiz.test.js   # Service layer unit tests
   docs/
-    quiz_collection.json  # Postman collection
+    quiz_collection.json  # Postman collection for API testing
+index.js             # Main application entry point
+Dockerfile           # Docker containerization configuration
 ```
 
 ## Features
@@ -30,24 +39,49 @@ src/
 
 ## Setup
 
-1. Install dependencies:
+### Local Development
+
+1. **Install dependencies:**
 ```bash
 npm install
 ```
 
-2. Set up environment variables:
-Create a `.env` file with your MongoDB connection string:
-```
+2. **Set up environment variables:**
+Create a `.env` file in the root directory:
+```env
 MONGODB_URI=your_mongodb_connection_string
 PORT=3000
 ```
 
-3. Start the server:
+3. **Start the development server:**
 ```bash
 npm run dev
 ```
 
 The server will run on `http://localhost:3000`
+
+### Testing
+
+Run the test suite:
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode (for development)
+npm run test:watch
+```
+
+### Docker Deployment
+
+1. **Build the Docker image:**
+```bash
+docker build -t quiz-server .
+```
+
+2. **Run the container:**
+```bash
+docker run -p 3000:3000 --env-file .env quiz-server
+```
 
 ## API Endpoints
 
