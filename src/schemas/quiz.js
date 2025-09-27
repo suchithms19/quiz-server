@@ -2,7 +2,8 @@ const { z } = require('zod');
 
 const optionSchema = z.object({
   text: z.string().min(1, "Option text is required"),
-  isCorrect: z.boolean()
+  isCorrect: z.boolean(),
+  order: z.number().int().min(0, "Order must be non-negative").default(0)
 });
 
 const questionSchema = z.object({
