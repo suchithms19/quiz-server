@@ -10,7 +10,7 @@ async function findQuizByName(name) {
 }
 
 async function listQuizzes() {
-  return Quiz.find({}, 'id name category noOfQuestions status createdAt');
+  return Quiz.find({}, 'id name category noOfQuestions status createdAt').sort({ createdAt: -1 });
 }
 
 async function getQuizById(id) {
