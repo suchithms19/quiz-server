@@ -74,16 +74,8 @@ describe('Quiz Service Tests', () => {
   });
 
 
-  test('should list all quizzes with selected fields', async () => {
+  test('should list all quizzes with selected fields sorted by createdAt descending', async () => {
     const mockQuizzes = [
-      {
-        id: 'quiz-1',
-        name: 'HTML Basics',
-        category: 'Web Development',
-        noOfQuestions: 5,
-        status: true,
-        createdAt: new Date('2023-01-01T00:00:00.000Z')
-      },
       {
         id: 'quiz-2',
         name: 'CSS Styling',
@@ -91,15 +83,27 @@ describe('Quiz Service Tests', () => {
         noOfQuestions: 4,
         status: false,
         createdAt: new Date('2023-01-02T00:00:00.000Z')
+      },
+      {
+        id: 'quiz-1',
+        name: 'HTML Basics',
+        category: 'Web Development',
+        noOfQuestions: 5,
+        status: true,
+        createdAt: new Date('2023-01-01T00:00:00.000Z')
       }
     ];
 
-    Quiz.find.mockResolvedValue(mockQuizzes);
+    const mockSort = jest.fn().mockResolvedValue(mockQuizzes);
+    Quiz.find.mockReturnValue({ sort: mockSort });
 
     const result = await quizService.listQuizzes();
 
     expect(Quiz.find).toHaveBeenCalledWith({}, 'id name category noOfQuestions status createdAt');
+    expect(mockSort).toHaveBeenCalledWith({ createdAt: -1 });
     expect(result).toEqual(mockQuizzes);
-    expect(result).toHaveLength(2); 
+    expect(result).toHaveLength(2);
+    expect(result[0].id).toBe('quiz-2');
+    expect(result[1].id).toBe('quiz-1');
   });
 });
