@@ -125,14 +125,16 @@ describe('Quiz Controller Tests', () => {
         name: 'Python Basics',
         category: 'Programming',
         noOfQuestions: 3,
-        status: true
+        status: true,
+        createdAt: new Date('2023-01-01T00:00:00.000Z')
       },
       {
         id: 'quiz-2',
         name: 'Database Design',
         category: 'Database',
         noOfQuestions: 5,
-        status: false
+        status: false,
+        createdAt: new Date('2023-01-02T00:00:00.000Z')
       }
     ];
 

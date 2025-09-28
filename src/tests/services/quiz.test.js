@@ -81,14 +81,16 @@ describe('Quiz Service Tests', () => {
         name: 'HTML Basics',
         category: 'Web Development',
         noOfQuestions: 5,
-        status: true
+        status: true,
+        createdAt: new Date('2023-01-01T00:00:00.000Z')
       },
       {
         id: 'quiz-2',
         name: 'CSS Styling',
         category: 'Web Development',
         noOfQuestions: 4,
-        status: false
+        status: false,
+        createdAt: new Date('2023-01-02T00:00:00.000Z')
       }
     ];
 
@@ -96,7 +98,7 @@ describe('Quiz Service Tests', () => {
 
     const result = await quizService.listQuizzes();
 
-    expect(Quiz.find).toHaveBeenCalledWith({}, 'id name category noOfQuestions status');
+    expect(Quiz.find).toHaveBeenCalledWith({}, 'id name category noOfQuestions status createdAt');
     expect(result).toEqual(mockQuizzes);
     expect(result).toHaveLength(2); 
   });
