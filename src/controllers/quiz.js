@@ -85,11 +85,21 @@ async function updateQbank(req, res) {
   }
 }
 
+async function getAnalytics(_req, res) {
+  try {
+    const analytics = await quizService.getAnalytics();
+    return res.status(200).json(analytics);
+  } catch (_error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
 module.exports = {
   createQbanks,
   listQbanks,
   getQbankById,
   updateQbank,
+  getAnalytics,
 };
 
 
