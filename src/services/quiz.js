@@ -17,11 +17,20 @@ async function getQuizById(id) {
   return Quiz.findById(id);
 }
 
+async function updateQuizById(id, quizData) {
+  return Quiz.findByIdAndUpdate(
+    id,
+    { $set: quizData },
+    { new: true }
+  );
+}
+
 module.exports = {
   createQuiz,
   findQuizByName,
   listQuizzes,
   getQuizById,
+  updateQuizById,
 };
 
 

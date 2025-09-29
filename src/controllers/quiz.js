@@ -53,10 +53,43 @@ async function getQbankById(req, res) {
   }
 }
 
+async function updateQbank(req, res) {
+  try {
+    const { id } = req.params;
+    const validation = validateQuiz(req.body);
+    if (!validation.success) {
+      return res.status(400).json({
+        errors: validation.errors.map((err) => ({
+          field: err.path ? err.path.join('.') : 'unknown',
+          message: err.message,
+        })),
+      });
+    }
+
+    const quizData = validation.data;
+    const updated = await quizService.updateQuizById(id, quizData);
+    if (!updated) {
+      return res.status(404).json({ error: 'Qbank not found' });
+    }
+
+    return res.status(200).json({
+      id: updated.id,
+      name: updated.name,
+      category: updated.category,
+      noOfQuestions: updated.noOfQuestions,
+      status: updated.status,
+      updatedAt: updated.updatedAt,
+    });
+  } catch (_error) {
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
 module.exports = {
   createQbanks,
   listQbanks,
   getQbankById,
+  updateQbank,
 };
 
 
