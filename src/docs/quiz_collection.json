@@ -2,12 +2,26 @@
   "info": {
     "name": "Quiz Server API",
     "_postman_id": "3f2c2d58-4b3e-4f0a-9f0e-9f7a5a2f9c12",
-    "description": "Collection for Quiz Server routes",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    "description": "Complete collection for Quiz Server API with all CRUD operations and analytics",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
   },
   "item": [
     {
-      "name": "Create Qbanks",
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/ping",
+          "host": ["{{baseUrl}}"],
+          "path": ["ping"]
+        },
+        "description": "Check if the server is running"
+      }
+    },
+    {
+      "name": "Create Quiz Bank",
       "request": {
         "method": "POST",
         "header": [
@@ -20,37 +34,99 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"name\": \"JavaScript Basics\",\n  \"category\": \"Programming\",\n  \"noOfQuestions\": 2,\n  \"status\": true,\n  \"questions\": [\n    {\n      \"description\": \"What is JavaScript?\",\n      \"options\": [\n        { \"text\": \"A programming language\", \"isCorrect\": true },\n        { \"text\": \"A database\", \"isCorrect\": false }\n      ]\n    },\n    {\n      \"description\": \"Which keyword is used to declare variables?\",\n      \"options\": [\n        { \"text\": \"var\", \"isCorrect\": true },\n        { \"text\": \"int\", \"isCorrect\": false }\n      ]\n    }\n  ]\n}"
-        }
+          "raw": "{\n  \"name\": \"JavaScript Basics\",\n  \"category\": \"Programming\",\n  \"noOfQuestions\": 2,\n  \"status\": true,\n  \"questions\": [\n    {\n      \"description\": \"What is JavaScript?\",\n      \"options\": [\n        { \"text\": \"A programming language\", \"isCorrect\": true, \"order\": 0 },\n        { \"text\": \"A database\", \"isCorrect\": false, \"order\": 1 },\n        { \"text\": \"A framework\", \"isCorrect\": false, \"order\": 2 }\n      ]\n    },\n    {\n      \"description\": \"Which keyword is used to declare variables?\",\n      \"options\": [\n        { \"text\": \"var\", \"isCorrect\": true, \"order\": 0 },\n        { \"text\": \"int\", \"isCorrect\": false, \"order\": 1 },\n        { \"text\": \"string\", \"isCorrect\": false, \"order\": 2 }\n      ]\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Create a new quiz question bank"
       }
     },
     {
-      "name": "List Qbanks",
+      "name": "List All Quiz Banks",
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
           "raw": "{{baseUrl}}/qbanks",
           "host": ["{{baseUrl}}"],
           "path": ["qbanks"]
-        }
+        },
+        "description": "Retrieve all quiz banks (summary only)"
       }
     },
     {
-      "name": "Get Qbank by ID",
+      "name": "Get Quiz Bank by ID",
       "request": {
         "method": "GET",
+        "header": [],
         "url": {
           "raw": "{{baseUrl}}/qbanks/:id",
           "host": ["{{baseUrl}}"],
-          "path": ["qbanks", ":id"]
-        }
+          "path": ["qbanks", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "quiz-id-here",
+              "description": "The ID of the quiz to retrieve"
+            }
+          ]
+        },
+        "description": "Retrieve a specific quiz bank with all questions"
+      }
+    },
+    {
+      "name": "Update Quiz Bank",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/qbanks/:id",
+          "host": ["{{baseUrl}}"],
+          "path": ["qbanks", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "quiz-id-here",
+              "description": "The ID of the quiz to update"
+            }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Updated JavaScript Basics\",\n  \"category\": \"Programming\",\n  \"noOfQuestions\": 3,\n  \"status\": true,\n  \"questions\": [\n    {\n      \"description\": \"What is JavaScript?\",\n      \"options\": [\n        { \"text\": \"A programming language\", \"isCorrect\": true, \"order\": 0 },\n        { \"text\": \"A database\", \"isCorrect\": false, \"order\": 1 }\n      ]\n    },\n    {\n      \"description\": \"Which keyword is used to declare variables?\",\n      \"options\": [\n        { \"text\": \"var\", \"isCorrect\": true, \"order\": 0 },\n        { \"text\": \"let\", \"isCorrect\": true, \"order\": 1 },\n        { \"text\": \"const\", \"isCorrect\": true, \"order\": 2 }\n      ]\n    },\n    {\n      \"description\": \"What is the result of typeof null?\",\n      \"options\": [\n        { \"text\": \"object\", \"isCorrect\": true, \"order\": 0 },\n        { \"text\": \"null\", \"isCorrect\": false, \"order\": 1 },\n        { \"text\": \"undefined\", \"isCorrect\": false, \"order\": 2 }\n      ]\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "description": "Update an existing quiz bank"
+      }
+    },
+    {
+      "name": "Get Analytics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/analytics",
+          "host": ["{{baseUrl}}"],
+          "path": ["analytics"]
+        },
+        "description": "Retrieve comprehensive analytics and statistics"
       }
     }
   ],
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:4000/api"
+      "value": "http://localhost:3000/api",
+      "description": "Base URL for the Quiz Server API"
     }
   ]
 }

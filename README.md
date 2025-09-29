@@ -105,17 +105,17 @@ docker run -p 3000:3000 --env-file .env quiz-server
     {
       "description": "What is JavaScript?",
       "options": [
-        { "text": "A programming language", "isCorrect": true },
-        { "text": "A database", "isCorrect": false },
-        { "text": "A framework", "isCorrect": false }
+        { "text": "A programming language", "isCorrect": true, "order": 0 },
+        { "text": "A database", "isCorrect": false, "order": 1 },
+        { "text": "A framework", "isCorrect": false, "order": 2 }
       ]
     },
     {
       "description": "Which keyword is used to declare variables?",
       "options": [
-        { "text": "var", "isCorrect": true },
-        { "text": "int", "isCorrect": false },
-        { "text": "string", "isCorrect": false }
+        { "text": "var", "isCorrect": true, "order": 0 },
+        { "text": "int", "isCorrect": false, "order": 1 },
+        { "text": "string", "isCorrect": false, "order": 2 }
       ]
     }
   ]
@@ -151,7 +151,8 @@ docker run -p 3000:3000 --env-file .env quiz-server
     "name": "JavaScript Basics",
     "category": "Programming",
     "noOfQuestions": 2,
-    "status": true
+    "status": true,
+    "createdAt": "2024-01-01T00:00:00.000Z"
   }
 ]
 ```
@@ -173,13 +174,79 @@ docker run -p 3000:3000 --env-file .env quiz-server
       "questionId": "uuid-generated-id",
       "description": "What is JavaScript?",
       "options": [
-        { "text": "A programming language", "isCorrect": true },
-        { "text": "A database", "isCorrect": false },
-        { "text": "A framework", "isCorrect": false }
+        { "text": "A programming language", "isCorrect": true, "order": 0 },
+        { "text": "A database", "isCorrect": false, "order": 1 },
+        { "text": "A framework", "isCorrect": false, "order": 2 }
       ]
     }
   ],
   "createdAt": "2024-01-01T00:00:00.000Z",
   "updatedAt": "2024-01-01T00:00:00.000Z"
+}
+```
+
+**Error Responses:**
+- **404** - Quiz not found
+- **500** - Internal server error
+
+#### Update Quiz Bank
+- **PUT** `/api/qbanks/:id`
+- **Description**: Updates an existing quiz bank
+
+**Request Body:** (Same as create quiz bank)
+
+**Success Response (200):**
+```json
+{
+  "id": "uuid-generated-id",
+  "name": "Updated JavaScript Basics",
+  "category": "Programming",
+  "noOfQuestions": 3,
+  "status": true,
+  "updatedAt": "2024-01-01T00:00:00.000Z"
+}
+```
+
+**Error Responses:**
+- **400** - Validation errors
+- **404** - Quiz not found
+- **500** - Internal server error
+
+#### Get Analytics
+- **GET** `/api/analytics`
+- **Description**: Retrieves comprehensive analytics and statistics
+
+**Success Response (200):**
+```json
+{
+  "totals": {
+    "totalQuizzes": 10,
+    "activeQuizzes": 8,
+    "totalQuestions": 45
+  },
+  "categoryBreakdown": [
+    {
+      "category": "Programming",
+      "quizzes": 5,
+      "activeQuizzes": 4,
+      "totalQuestions": 25
+    },
+    {
+      "category": "Mathematics",
+      "quizzes": 3,
+      "activeQuizzes": 2,
+      "totalQuestions": 15
+    }
+  ],
+  "statusBreakdown": [
+    {
+      "status": "Active",
+      "count": 8
+    },
+    {
+      "status": "Inactive",
+      "count": 2
+    }
+  ]
 }
 ```

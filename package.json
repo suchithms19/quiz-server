@@ -1,15 +1,29 @@
 {
-  "name": "backend",
+  "name": "quiz-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "A comprehensive REST API for managing quiz question banks with analytics capabilities",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
+    "start": "node index.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "quiz",
+    "api",
+    "rest",
+    "nodejs",
+    "express",
+    "mongodb",
+    "mongoose",
+    "zod",
+    "validation",
+    "education",
+    "assessment"
+  ],
+  "author": "Quiz Server Team",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
